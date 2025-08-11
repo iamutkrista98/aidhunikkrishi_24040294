@@ -1,0 +1,20 @@
+{
+    "isLoggedIn": false,
+    "user": [],
+    "selected": "Home",
+    "selectedIndex": 3,
+    "users": [
+        {
+            "username": "admin",
+            "password": "$2b$12$xvI48TJ/SMKbxxMd2N8xk.W.qJ6EKLiwKBeQoCbHTZv5gzOtipeuG",
+            "email": "admin@gmail.com",
+            "phone_number": "98453354534"
+        },
+        {
+            "username": "utkrista",
+            "email": "utkrista.acharya@yahoo.com",
+            "phone_number": "2131242",
+            "password": "$2b$12$ZWgHKxTHfn7n5ZXL9hInfOIIY8ZUhmrGnKSs7EJxsfG2R.TUls.Xu"
+        }
+    ]
+}
