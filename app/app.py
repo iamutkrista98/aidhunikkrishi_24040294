@@ -5,6 +5,7 @@ import streamlit.components.v1 as components
 from Login import create_login_page
 from SignUp import create_sign_up_page
 from Continuous_Learning_and_Feedback import *
+from remedylocation import *
 from Login import *
 from apiintegration import *
 import os
@@ -185,10 +186,11 @@ url_mappings = [
     "Leaf Disease Identification",
     "Continuous Learning",
     "Import Data",
+    "Remedial Sites"
 ]
 icon_mappings = [
     "house-fill", "cpu-fill", "chat-right-text-fill",
-    "cloud-download-fill", "shield-fill", "person-fill",
+    "cloud-download-fill","pin-map-fill", "shield-fill", "person-fill",
     "book-fill",  # Icon for Import Data 
 
 ]
@@ -367,6 +369,8 @@ if st.session_state.selected == "Home":
 if st.session_state.selected == "Continuous Learning":
     continuous_learning_and_feedback()
 
+if st.session_state.selected == "Remedial Sites":
+    remedylocation()
 
 if st.session_state.selected == 'Login':
     create_login_page(update_session)
@@ -381,11 +385,11 @@ if st.session_state.selected == 'Logout':
 
 
 if st.session_state.selected == "Import Data":
-    if not st.session_state.isLoggedIn:
-        st.warning("Please login to access this page.")
-        update_session('selected', 'Home')
-    else:  
-        import_data_from_api(update_session)
+    # if not st.session_state.isLoggedIn:
+    #     st.warning("Please login to access this page.")
+    #     update_session('selected', 'Home')
+    # else:  
+    import_data_from_api(update_session)
 
 if st.session_state.selected == "Documentation":
     # Set page header
@@ -448,4 +452,4 @@ if st.session_state.selected == "Documentation":
 
     # Version Info
     st.markdown("---")
-    st.caption("Current Version: 1.0.0 | Last Updated: August 8, 2025")
+    st.caption("Current Version: 1.0.1 | Last Updated: August 12, 2025")

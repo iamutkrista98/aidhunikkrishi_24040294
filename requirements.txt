@@ -4,3 +4,5 @@ streamlit-option-menu
 numpy
 pandas
 requests
+folium
+streamlit_folium

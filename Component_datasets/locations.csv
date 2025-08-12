@@ -1,0 +1,9 @@
+type,name,latitude,longitude,rating,hours
+pesticide,Active Pest Control,27.7172,85.324,⭐ 4.9,Open 24h
+pesticide,Pest Defence Service,27.715,85.32,⭐ 4.9,Open 24h
+pesticide,Orange Ball Pvt. Ltd.,27.72,85.33,⭐ 4.9,Open 24h
+pesticide,City Pest Control,27.725,85.335,⭐ 5.0,Open 24h
+nursery,Kathmandu Nursery,27.718,85.326,⭐ 4.0,Opens 6 AM
+nursery,Royal Nursery,27.721,85.328,⭐ 4.5,Opens 7 AM
+nursery,Standard Nursery,27.723,85.33,⭐ 4.1,Opens 9 AM
+nursery,Swoyambhu Garden Service,27.726,85.332,⭐ 4.7,Opens 7 AM
