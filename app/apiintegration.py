@@ -17,7 +17,7 @@ def import_data_from_api(update_session):
 
         1. **Provide Input**  
            → Enter the valid API endpoint URL   
-           → Name your dataset (e.g., `crime_data_2024`)
+           → Name your dataset (e.g., `location`)
 
         2. **Configure Settings**  
            → Select file type (Auto-detected by default)  
@@ -33,7 +33,7 @@ def import_data_from_api(update_session):
         
         **Example Endpoints:**  
         ```
-        https://raw.githubusercontent.com/iamutkrista98/pentasynergeticsproj/main/csvjson.json
+        https://raw.githubusercontent.com/iamutkrista98/pentasynergeticsproj/refs/heads/main/location.json
         ```
         """)
 
@@ -42,7 +42,7 @@ def import_data_from_api(update_session):
     with col1:
         api_url = st.text_input(
             "Dataset Endpoint URL",
-            value="https://raw.githubusercontent.com/iamutkrista98/pentasynergeticsproj/main/csvjson.json",
+            value="https://raw.githubusercontent.com/iamutkrista98/pentasynergeticsproj/refs/heads/main/location.json",
             help="Supports HTTP/HTTPS endpoints with public access"
         )
     with col2:
@@ -54,7 +54,7 @@ def import_data_from_api(update_session):
 
     dataset_name = st.text_input(
         "Dataset Name",
-        placeholder="crime_data_2024",
+        placeholder="location",
         help="Will be saved as [name].csv in project datasets"
     )
 

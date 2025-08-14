@@ -40,7 +40,7 @@ def create_login_page(update_session):
     # Sign Up Link
     st.markdown(f"""
     <div style="text-align: center; margin-top: 20px;">
-        <div>User count: {len(st.session_state.users)} </div> 
+        <div>Total User count: {len(st.session_state.users)} </div> 
         Don't have an account? <a href="?page=Sign+Up" target="_self">Sign up here</a>.
     </div>
     """, unsafe_allow_html=True)

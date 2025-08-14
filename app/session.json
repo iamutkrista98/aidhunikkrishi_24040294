@@ -1,8 +1,8 @@
 {
     "isLoggedIn": false,
     "user": [],
-    "selected": "Remedial Sites",
-    "selectedIndex": 3,
+    "selected": "Home",
+    "selectedIndex": 4,
     "users": [
         {
             "username": "admin",

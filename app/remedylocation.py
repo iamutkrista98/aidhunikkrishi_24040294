@@ -2,11 +2,14 @@ import streamlit as st
 import folium
 import pandas as pd
 import os
-from streamlit_folium import folium_static
+from folium.plugins import MarkerCluster
+import streamlit.components.v1 as components
+from branca.element import Template, MacroElement
 
+# Root directory
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-#Create sample CSV if it doesn't exist
+# Create sample CSV if it doesn't exist
 def create_sample_csv(file_path):
     if not os.path.exists(file_path):
         data = [
@@ -23,42 +26,60 @@ def create_sample_csv(file_path):
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         df.to_csv(file_path, index=False)
 
+# Map rendering with geolocation
+def show_map(data, lat, lon, color, icon, title):
+    m = folium.Map(location=[lat, lon], zoom_start=14, tiles="CartoDB positron")
+    marker_cluster = MarkerCluster().add_to(m)
+
+    for _, row in data.iterrows():
+        popup_html = f"""
+        <b>{row['name']}</b><br>
+        {row['rating']}<br>
+        <i>{row['hours']}</i>
+        """
+        folium.Marker(
+            location=[row["latitude"], row["longitude"]],
+            popup=popup_html,
+            tooltip=f"{row['name']} ({row['rating']})",
+            icon=folium.Icon(color=color, icon=icon, prefix='glyphicon')
+        ).add_to(marker_cluster)
+
+    # Inject geolocation JS
+    geolocation_js = """
+    {% macro script(this, kwargs) %}
+    navigator.geolocation.getCurrentPosition(function(location) {
+        var latlng = L.latLng(location.coords.latitude, location.coords.longitude);
+        L.marker(latlng, {
+            icon: L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30],
+                popupAnchor: [0, -30]
+            }),
+            title: "Your Location"
+        }).bindPopup("📍 You are here").addTo({{this._parent.get_name()}});
+    });
+    {% endmacro %}
+    """
+    macro = MacroElement()
+    macro._template = Template(geolocation_js)
+    m.get_root().add_child(macro)
+
+    folium.LayerControl().add_to(m)
+
+    # Render map as raw HTML
+    map_html = m.get_root().render()
+    components.html(map_html, height=600, width=1200)
+
 # Main app
 def remedylocation():
-    st.markdown("""
-        <style>
-        .button-style {
-            display: inline-block;
-            padding: 0.75em 1.5em;
-            margin: 1em 0;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            border: none;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .button-style:hover {
-            background: linear-gradient(135deg, #66BB6A, #388E3C);
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-        .caption {
-            font-size: 1.5em;
-            font-weight: 600;
-            margin-top: 1em;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    st.title("Remedial Sites Nearby🌿🪴🐞📍")
+    st.set_page_config(layout="centered")
+    st.title("Remedial Sites Nearby 🌿🐞📍")
 
     central_lat = 27.7172
     central_lon = 85.3240
 
-    file_path = os.path.join(root_dir,"Component_datasets","locations.csv")
+    file_path = os.path.join(root_dir, "Component_datasets", "locations.csv")
     create_sample_csv(file_path)
 
     try:
@@ -67,30 +88,16 @@ def remedylocation():
         st.error(f"Error loading location data: {e}")
         return
 
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.markdown('<div class="button-style">🧪 Pesticide Stores Near Me</div>', unsafe_allow_html=True):
-            show_map(df[df["type"] == "pesticide"], central_lat, central_lon, "red", "info-sign", "Pesticide Stores")
+    # Section 1: Pesticide Stores
+    st.markdown("## 🧪 Pesticide Stores Nearby")
+    show_map(df[df["type"] == "pesticide"], central_lat, central_lon, "red", "info-sign", "Pesticide Stores")
 
-    with col2:
-        if st.markdown('<div class="button-style">🌱 Plant Nurseries Near Me</div>', unsafe_allow_html=True):
-            show_map(df[df["type"] == "nursery"], central_lat, central_lon, "green", "leaf", "Plant Nurseries")
+    st.markdown("---")
 
-#Map rendering
-def show_map(data, lat, lon, color, icon, title):
-    st.markdown(f"<h2 class='caption'>Nearby {title}</h2>", unsafe_allow_html=True)
-    m = folium.Map(location=[lat, lon], zoom_start=13)
+    # Section 2: Plant Nurseries
+    st.markdown("## 🌱 Plant Nurseries Nearby")
+    show_map(df[df["type"] == "nursery"], central_lat, central_lon, "green", "leaf", "Plant Nurseries")
 
-    for _, row in data.iterrows():
-        folium.Marker(
-            location=[row["latitude"], row["longitude"]],
-            popup=f"<b>{row['name']}</b><br>{row['rating']}<br>{row['hours']}",
-            tooltip=f"{row['name']} ({row['rating']})",
-            icon=folium.Icon(color=color, icon=icon)
-        ).add_to(m)
-
-    folium_static(m)
-
-#Run the app
+# Run the app
 if __name__ == "__main__":
     remedylocation()

@@ -76,7 +76,7 @@ st.markdown(
             top: 0;
             left: 0;
             width: 100%;
-            background: #DC143C;
+            background:#032030 ;
             padding: 1rem;
             color: white;
             font-size: 1.5rem;
@@ -95,7 +95,7 @@ st.markdown(
             padding-top: 6rem; /* Add space for the fixed header */
         }
         .stButton>button {
-            background: linear-gradient(135deg, #1e3a5f, #2a5298);
+            background: linear-gradient(135deg, #1e3a5f, #032030);
             color: white;
             font-weight: bold;
             border-radius: 8px;
@@ -108,6 +108,9 @@ st.markdown(
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
+        .stSidebar{
+        position: absolute;
+        }
         .main-content {
             padding: 2rem;
             background: rgba(255, 255, 255, 0.1);
@@ -118,6 +121,10 @@ st.markdown(
         }
         .stImage img {
             border-radius: 12px;
+            border-style:solid;
+            border-color:white;
+            position:relative;
+            top:10px;
         }
 
         .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
@@ -150,7 +157,20 @@ st.markdown(
             margin: 1rem 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
         }
+        .feature-card h3{
+        font-size:2rem;
+
+        }
+        .feature-card p{
+        font-size: 1rem;
+        font-weight:500;
+        }
+        .feature-icon{
+        font-size: 2rem;
+        }
+        
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
@@ -160,7 +180,7 @@ st.markdown(
             color: white !important;
             padding: 1rem 2rem !important;
             border-radius: 12px !important;
-            font-size: 1.1rem !important;
+            font-size: 1rem !important;
             border: none !important;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -236,17 +256,17 @@ with st.sidebar:
         styles={
             "container": {
                 "padding": "10px",
-                "background": "linear-gradient(135deg, #1e3a5f, #032030)",
+                "background": "linear-gradient(135deg, #1e3a5f, #008080)",
                 "box-shadow": "0px 4px 15px rgba(0, 0, 0, 0.3)",
                 "border-radius": "12px"
             },
             "menu-title": {
-                "font-size": "22px",
+                "font-size": "17px",
                 "font-weight": "bold",
                 "color": "#ffffff",
                 "margin-left": "0px !important",
                 "margin-right": "0px !important",
-                "padding": "5px",
+                "padding": "5px"
             },
             "nav-link": {
                 "text-decoration": "none",
@@ -260,11 +280,12 @@ with st.sidebar:
                 "background": "rgba(255, 255, 255, 0.2)",
                 "color": "#ffffff",
                 "font-weight": "bold",
+                "font-size":"16px",
                 "border-radius": "8px"
             },
             "icon": {
                 "color": "#ffffff",
-                "font-size": "20px"
+                "font-size": "16px"
             },
         }
     )
@@ -281,8 +302,8 @@ if st.session_state.selected == "Home":
     # Hero Section
     st.markdown("""
     <div class="hero">
-        <h1 style="font-size: 2.8rem; margin-bottom: 1rem;">AiDHUNIK KRISHI:  An Advanced CNN Based Plant Leaf Disease Classification Platform</h1>
-        <h3 style="font-weight: 300; margin-bottom: 2rem;">Empowering Stakeholders in Agricultural Sector</h3>
+        <h1 style="font-size: 2.4rem; margin-bottom: 1rem;">AiDHUNIK KRISHI:  An Advanced CNN Based Plant Leaf Disease Classification Platform 🌿🪴🍀</h1>
+        <h3 style="font-weight: 300; margin-bottom: 2rem;font-size: 2rem">Empowering Stakeholders in Agricultural Sector</h3>
         <div style="display: flex; gap: 1rem; justify-content: center;">
             <a href="#features" class="cta-button">Explore Features</a>
             <a href="#learn-more" class="cta-button">Learn More</a>
@@ -295,7 +316,7 @@ if st.session_state.selected == "Home":
     with col1:
         st.markdown("""
         ## About The Platform
-        AiDHUNIK KRISHI is an advanced CNN-based plant leaf disease classification platform designed to enhance agricultural productivity and public health through advanced analytics. Our platform empowers farmers, researchers, and government agencies with accurate, real-time insights into plant health, aiding in early disease detection and mitigation strategies. This project aims to revolutionize agricultural practices by integrating cutting-edge machine learning to foster sustainable growth and improve crop yields globally. We combine deep learning models with extensive agricultural data to provide unparalleled precision in disease identification, offering a critical tool for informed decision-making in the agricultural sector.
+        AiDHUNIK KRISHI is an advanced CNN-based plant leaf disease classification platform designed to enhance agricultural productivity and public health through advanced analytics. The platform empowers farmers, researchers, and government agencies with accurate, real-time insights into plant health, aiding in early disease detection and mitigation strategies. This project aims to revolutionize agricultural practices by integrating cutting-edge machine learning to foster sustainable growth and improve crop yields globally. We combine deep learning models with extensive agricultural data to provide unparalleled precision in disease identification, offering a critical tool for informed decision-making in the agricultural sector.
         """)
 
     if st.button("Get Started →", key="hero_button"):
@@ -312,37 +333,43 @@ if st.session_state.selected == "Home":
     # Features Section
     st.markdown('<a name="features"></a>', unsafe_allow_html=True)
     st.markdown("""
-    ## 🔍Our Key Features
-    Integrated solutions tailored for Nepal's security landscape
+    ## 🔍Key Features
+    Integrated solutions tailored for enhancement of agricultural landscape
     """)
 
     # Feature Cards
     features = [
         {
-            "icon": "👨‍🌾",
+            "icon": "👨‍🌾🖥️",
             "title": "Companion Application",
             "desc": "An AI Based Companion for Stakeholders in the field of Agriculture"
         },
         {
-            "icon": "🔮",
-            "title": "CNN Based Plant Leaf Disease Classification",
-            "desc": "CNN Powered Plant Leaf Disease Identification"
+            "icon": "🌿🪴",
+            "title": "Integrated CNN Based Plant Leaf Disease Classification",
+            "desc": "Integration of CNN Powered Plant Leaf Disease Classification Engine"
         },
         {
-            "icon": "🔄",
-            "title": "Continuous Learning",
-            "desc": "Real-time feedback integration and adaptive learning systems"
+            "icon": "📢🌟",
+            "title": "Continuous Learning and Feedback Collection",
+            "desc": "Real-time feedback integration for adaptive learning systems and enablement of constant revisions"
         },
         {
-            "icon": "🔗",
+            "icon": "🔗🌐",
             "title": "Handling of API",
-            "desc": "Integration Possibilities within preexisting system through API Endpoint Enablement"
+            "desc": "API Endpoint Enablement for csv/json based dataset gathering for certain functionalities"
         },
+        {
+            "icon": "🌍🗺️",
+            "title": "Geo-Mapping of Remedial Sites",
+            "desc": "Accessible information pertaining to location of remedial sites like nursery and pesticide centres"
+
+        }
     ]
 
-    cols = st.columns(2)
+    cols = st.columns(1)
     for idx, feature in enumerate(features):
-        with cols[idx % 2]:
+        with cols[idx % 1]:
             st.markdown(f"""
             <div class="feature-card">
                 <div class="feature-icon">{feature['icon']}</div>
@@ -397,8 +424,6 @@ if st.session_state.selected == "Documentation":
     st.subheader("Access project materials and technical resources")
 
 
-
-
     # Main content container
     with st.container():
         # Documentation Card with enhanced styling
@@ -411,7 +436,7 @@ if st.session_state.selected == "Documentation":
             </p>
             <a href='https://github.com/iamutkrista98/MScProject/blob/main/README.md' 
                target='_blank' 
-               style='background-color: #4a90e2; 
+               style='background-color: #008080; 
                       color: white; 
                       padding: 0.5rem 1.5rem; 
                       border-radius: 5px; 

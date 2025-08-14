@@ -4,7 +4,7 @@ import bcrypt
 
 def create_sign_up_page(update_session):
     # Header and Subheader
-    st.title("🔒 Create an Account ")
+    st.title("🤵‍♂️ Create an Account ")
     st.subheader("Join us and get started today!")
     
     # Create input fields for username, password, email, and phone
@@ -40,7 +40,7 @@ def create_sign_up_page(update_session):
     # Sign Up Link
     st.markdown(f"""
     <div style="text-align: center; margin-top: 20px;">
-        <div>User count: {len(st.session_state.users)} </div> 
+        <div>Total User count: {len(st.session_state.users)} </div> 
         Already have an account? <a href="/?page=Login" target="_self">Login here</a>.
     </div>
     """, unsafe_allow_html=True)
